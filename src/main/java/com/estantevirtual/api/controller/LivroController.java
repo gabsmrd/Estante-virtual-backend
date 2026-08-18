@@ -1,6 +1,6 @@
 package com.estantevirtual.api.controller;
 
-import com.estantevirtual.api.model.Livro;
+import com.estantevirtual.api.entity.LivroEntity;
 import com.estantevirtual.api.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,24 +18,24 @@ public class LivroController {
     private LivroRepository repository;
 
     @GetMapping
-    public List<Livro> listarTodos() {
+    public List<LivroEntity> listarTodos() {
         return repository.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Livro> salvar(@RequestBody Livro livro) {
-        Livro novoLivro = repository.save(livro);
+    public ResponseEntity<LivroEntity> salvar(@RequestBody LivroEntity livro) {
+        LivroEntity novoLivro = repository.save(livro);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoLivro);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Livro> atualizar(@PathVariable Long id, @RequestBody Livro livroDados) {
+    public ResponseEntity<LivroEntity> atualizar(@PathVariable Long id, @RequestBody LivroEntity livroDados) {
         return repository.findById(id)
                 .map(livroExistente -> {
                     livroExistente.setReview(livroDados.getReview());
                     livroExistente.setNota(livroDados.getNota());
                     livroExistente.setStatusLeitura(livroDados.getStatusLeitura());
-                    Livro atualizado = repository.save(livroExistente);
+                    LivroEntity atualizado = repository.save(livroExistente);
                     return ResponseEntity.ok(atualizado);
                 })
                 .orElse(ResponseEntity.notFound().build());

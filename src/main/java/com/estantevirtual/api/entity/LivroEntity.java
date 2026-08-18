@@ -1,10 +1,10 @@
-package com.estantevirtual.api.model;
+package com.estantevirtual.api.entity;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_livros")
-public class Livro {
+public class LivroEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,9 @@ public class Livro {
 
     private int nota; // 1 a 5
 
-    public Livro() {}
+    public LivroEntity() {}
 
-    public Livro(String titulo, String autor, String capaUrl, int totalPaginas, String statusLeitura, String review, int nota) {
+    public LivroEntity(String titulo, String autor, String capaUrl, int totalPaginas, String statusLeitura, String review, int nota) {
         this.titulo = titulo;
         this.autor = autor;
         this.capaUrl = capaUrl;
