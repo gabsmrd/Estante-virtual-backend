@@ -24,6 +24,10 @@ public class LivroEntity {
 
     private int nota; // 1 a 5
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private UsuarioEntity usuario;
+
     public LivroEntity() {}
 
     public LivroEntity(String titulo, String autor, String capaUrl, int totalPaginas, String statusLeitura, String review, int nota) {
@@ -59,4 +63,9 @@ public class LivroEntity {
 
     public int getNota() { return nota; }
     public void setNota(int nota) { this.nota = nota; }
+
+    public UsuarioEntity getUsuario() {return usuario;}
+    public void setUsuario(UsuarioEntity usuario) {this.usuario = usuario;}
+
+
 }

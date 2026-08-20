@@ -22,6 +22,11 @@ public class LivroController {
         return repository.findAll();
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<LivroEntity> listarPorUsuario(@PathVariable Long usuarioId) {
+        return repository.findByUsuarioId(usuarioId);
+    }
+
     @PostMapping
     public ResponseEntity<LivroEntity> salvar(@RequestBody LivroEntity livro) {
         LivroEntity novoLivro = repository.save(livro);
@@ -35,6 +40,7 @@ public class LivroController {
                     livroExistente.setReview(livroDados.getReview());
                     livroExistente.setNota(livroDados.getNota());
                     livroExistente.setStatusLeitura(livroDados.getStatusLeitura());
+
                     LivroEntity atualizado = repository.save(livroExistente);
                     return ResponseEntity.ok(atualizado);
                 })
